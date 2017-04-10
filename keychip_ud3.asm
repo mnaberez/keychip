@@ -2,7 +2,6 @@
 
 L0070           = $0070
 L03A9           = $03A9
-L1506           = $1506
 LB000           = $B000
 LC442           = $C442
 LC52C           = $C52C
@@ -15,132 +14,76 @@ LE5BA           = $E5BA
 LE62E           = $E62E
 LE6E4           = $E6E4
 LF232           = $F232
-LFF98           = $FF98
 LFFC9           = $FFC9
 LFFCC           = $FFCC
 
-L9000:  sta     $5F
-        stx     $60
-        ldx     #$90
-        sec
-        jsr     LDB55
-        jsr     LDCE9
-        rts
+L9000:
+    sta     $5F
+    stx     $60
+    ldx     #$90
+    sec
+    jsr     LDB55
+    jsr     LDCE9
+    rts
 
-L900E:  ora     $97
-        cpx     $07
-        tya
-        !byte   $13
-        !byte   $0C
-        tya
-        !byte   $1F
-        asl     $3598
-        bit     $4B98
-        !byte   $37
-        tya
-        !byte   $4F
-        !byte   $4B
-        !byte   $9E
-        dec     $0F,x
-        tya
-        bvs     L9077
-        tya
-        !byte   $5B
-        !byte   $42
-        txs
-        !byte   $13
-        eor     #$9A
-        !byte   $17
-        eor     ($9A,x)
-        and     ($4F,x)
-        tya
-        txa
-        !byte   $47
-        tya
-        !byte   $8B
-        lsr     $98
-        ldx     $4E
-        tya
-        !byte   $BB
-        jmp     LFF98
+table_1:
+    !byte $05, $97, $E4
+    !byte $07, $98, $13
+    !byte $0C, $98, $1F
+    !byte $0E, $98, $35
+    !byte $2C, $98, $4B
+    !byte $37, $98, $4F
+    !byte $4B, $9E, $D6
+    !byte $0F, $98, $70
+    !byte $50, $98, $5B
+    !byte $42, $9A, $13
+    !byte $49, $9A, $17
+    !byte $41, $9A, $21
+    !byte $4F, $98, $8A
+    !byte $47, $98, $8B
+    !byte $46, $98, $A6
+    !byte $4E, $98, $BB
+    !byte $4C, $98, $FF
+    !byte $45, $99, $01
+    !byte $44, $99, $08
+    !byte $4D, $99, $4E
+    !byte $48, $99, $71
+    !byte $4A, $99, $78
+    !byte $39, $99, $C2
+    !byte $32, $99, $C3
+    !byte $3A, $99, $C4
+    !byte $29, $99, $C5
+    !byte $22, $99, $C6
+    !byte $2A, $99, $C7
+    !byte $19, $99, $C8
+    !byte $12, $99, $C9
+    !byte $1A, $99, $CA
+    !byte $0A, $99, $CB
+    !byte $1F, $9F, $0A
+    !byte $14, $9F, $0E
 
-        eor     $99
-        ora     ($44,x)
-        sta     $4D08,y
-        sta     $484E,y
-        sta     $4A71,y
-        sta     $3978,y
-        sta     $32C2,y
-        sta     $3AC3,y
-        sta     $29C4,y
-        sta     $22C5,y
-        sta     $2AC6,y
-        sta     $19C7,y
-        sta     $12C8,y
-        sta     $1AC9,y
-        sta     $0ACA,y
-        sta     $1FCB,y
-        !byte   $9F
-        asl     ;a
-        !byte   $14
-        !byte   $9F
-        !byte   $0E
-L9074:  !byte   $92
-        ora     $03
-L9077:  ora     ($0C,x)
-        !byte   $0C
-        !byte   $93
-        !byte   $17
-        ora     ($10,x)
-        sty     $05
-        !byte   $0C
-        ora     $14
-        ora     $93
-        ora     ($16,x)
-        ora     $93
-        ora     ($16,x)
-        ora     $20
-        asl     L9303,x
-        ora     ($16,x)
-        ora     $20
-        !byte   $02
-        !byte   $0F
-        clc
-        !byte   $8F
-        asl     $06
-        !byte   $92
-        rol     $820C,x
-        rol     $8D14,x
-        ora     $0D
-        jsr     L1506
-        !byte   $0C
-        !byte   $0C
-        !byte   $80
-L90A9:  !byte   $13
-        dey
-        ora     ($96),y
-        ora     $20BE,x
-        ldy     $14
-        sty     $03
-        !byte   $93
-        !byte   $93
-        !byte   $83
-        sta     ($9E),y
-        sta     L92BC,x
-        !byte   $8F
-        sty     $89,x
-L90BF:  and     ($58,x)
-        ora     $2091
-        !byte   $20
-        !byte   $9D
-L90C6:  sta     $2193,x
-        jmp     $930D
+table_2:
+    !byte $92, $05, $03, $01, $0C, $0C, $93, $17
+    !byte $01, $10, $84, $05, $0C, $05, $14, $05
+    !byte $93, $01, $16, $05, $93, $01, $16, $05
+    !byte $20, $1E, $03, $93, $01, $16, $05, $20
+    !byte $02, $0F, $18, $8F, $06, $06, $92, $3E
+    !byte $0C, $82, $3E, $14, $8D, $05, $0D, $20
+    !byte $06, $15, $0C, $0C, $80
 
-        and     ($52,x)
-L90CE:  ora     $3AC9
-        bcs     L90DD
-        cmp     #$20
-        beq     L90C6
+table_3:
+    !byte $13, $88, $11, $96, $1D, $BE, $20, $A4
+    !byte $14, $84, $03, $93, $93, $83, $91, $9E
+    !byte $9D, $BC, $92, $8F, $94, $89
+
+table_4:
+    !byte $21, $58, $0D, $91, $20, $20, $9D, $9D
+    !byte $93, $21, $4C, $0D, $93, $21, $52
+
+table_5:
+    !byte $0D, $C9, $3A, $B0, $0A, $C9, $20, $F0
+    !byte $EF
+
 L90D7:  sec
         sbc     #$30
         sec
@@ -149,22 +92,25 @@ L90DD:  rts
 
 L90DE:  cmp     #$3A
         bcs     L90DD
+
+L90E2:
         cmp     #$20
         bne     L90D7
         jmp     L0070
 
 L90E9:  ldx     #$0F
-L90EB:  lda     L90CE,x
+L90EB:  lda     table_5,x
         sta     $78,x
         dex
         bne     L90EB
         rts
 
-L90F4:  ldx     #$4C
+;install chrget wedge
+L90F4:  ldx     #$4C        ;JMP $90E2
         stx     $7D
-        lda     #$E2
+        lda     #<L90E2
         sta     $7E
-        lda     #$90
+        lda     #>L90E2
         sta     $7F
         cpx     $79
         beq     L910C
@@ -500,7 +446,7 @@ L939A:  lda     $03B3
         txa
         pha
         ldx     #$00
-L93AA:  cmp     L90A9,x
+L93AA:  cmp     table_3,x
         bne     L93C0
         lda     $0385
         lsr     ;a
@@ -509,7 +455,7 @@ L93AA:  cmp     L90A9,x
         beq     L93C6
 L93B9:  pla
         inx
-        lda     L90A9,x
+        lda     table_3,x
         bne     L9392
 L93C0:  inx
         inx
@@ -1003,8 +949,9 @@ L9745:  ldx     $98
         lda     $97
         cmp     #$FF
         beq     L9729
+
 L9756:  ldx     #$00
-L9758:  cmp     L900E,x
+L9758:  cmp     table_1,x
         beq     L9766
         inx
         inx
@@ -1017,10 +964,10 @@ L9766:  lda     #$97
         lda     #$35
         pha
         inx
-        lda     L900E,x
+        lda     table_1,x
         pha
         inx
-        lda     L900E,x
+        lda     table_1,x
         pha
         inc     $A7
         lda     $A4
@@ -1881,7 +1828,7 @@ L9DBF:  sta     $8000,y
         ldy     #$FF
 L9DC7:  dex
 L9DC8:  iny
-        lda     L9074,y
+        lda     table_2,y
         bpl     L9DC8
         cpx     #$80
         bcc     L9DC7
@@ -1890,7 +1837,7 @@ L9DD4:  ora     #$80
         sta     $8003,x
         iny
         inx
-        lda     L9074,y
+        lda     table_2,y
         bpl     L9DD4
         rts
 
@@ -2131,7 +2078,7 @@ L9F91:  jsr     LFFCC
 
 L9F99:  sei
         sty     $9E
-L9F9C:  lda     L90BF,x
+L9F9C:  lda     table_4,x
         sta     $026E,y
         dex
         dey
