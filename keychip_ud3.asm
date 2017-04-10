@@ -143,13 +143,16 @@ L912B:  sei
 L9132:  ldx     #$66
         ldy     #$96
         bne     L912B
+
+;seems to be checking for certain code at $B000
 L9138:  lda     LB000
-        cmp     #$4C
+        cmp     #$4C        ;JMP abs
         bne     L9149
         lda     $B003
-        cmp     #$A9
+        cmp     #$A9        ;LDA imm
         bne     L9149
         jsr     LB000
+
 L9149:  sei
         ldx     #$49
         lda     #$00
@@ -2115,3 +2118,6 @@ banner:
     !byte $31,$39,$38,$31
 filler:
     !byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+
+    ;force travis build to fail
+    !byte $ff
