@@ -2118,6 +2118,3 @@ banner:
     !byte $31,$39,$38,$31
 filler:
     !byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
-
-    ;force travis build to fail
-    !byte $ff
