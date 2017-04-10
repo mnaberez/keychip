@@ -1,18 +1,8 @@
-; da65 V2.15
-; Created:    2017-04-09 22:57:51
-; Input file: keychip_ud3.bin
-; Page:       1
-
-
         * = $9000
 
 L0070           = $0070
-L0328           = $0328
 L03A9           = $03A9
-L090D           = $090D
-L0B20           = $0B20
 L1506           = $1506
-L3931           = $3931
 LB000           = $B000
 LC442           = $C442
 LC52C           = $C52C
@@ -2161,7 +2151,7 @@ L9FB4:  jsr     LE229
 L9FBB:  cpy     #$47
         bne     L9FC1
         ldy     #$09
-L9FC1:  lda     L9FD4,x
+L9FC1:  lda     banner,x
         sta     $814F,y
         dex
         dey
@@ -2171,31 +2161,10 @@ L9FCB:  ldx     $97
         bne     L9FCB
         jmp     LE229
 
-L9FD4:  jsr     L0B20
-        ora     $19
-        !byte   $03
-        php
-        ora     #$10
-        jsr     L0328
-        and     #$20
-        !byte   $17
-        ora     #$12
-        !byte   $14
-        jsr     L090D
-        !byte   $03
-        !byte   $12
-        !byte   $0F
-        !byte   $13
-        ora     $1413,y
-        ora     $0D
-        !byte   $13
-        jsr     L3931
-        sec
-        and     ($AA),y
-        tax
-        tax
-        tax
-        tax
-        tax
-        tax
-        tax
+banner:
+    ;"  keychip (c) wirt microsystems 1981" in screen codes
+    !byte $20,$20,$0b,$05,$19,$03,$08,$09,$10,$20,$28,$03,$29,$20,$17,$09
+    !byte $12,$14,$20,$0D,$09,$03,$12,$0F,$13,$19,$13,$14,$05,$0D,$13,$20
+    !byte $31,$39,$38,$31
+filler:
+    !byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
